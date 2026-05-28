@@ -47,6 +47,13 @@ export async function refreshAccessToken(token: CalendarToken): Promise<Calendar
   }
 }
 
+/** 終日イベントの終了日は exclusive なので1日加算する */
+function allDayEndDate(dateStr: string): string {
+  const d = new Date(dateStr.slice(0, 10) + 'T00:00:00Z')
+  d.setUTCDate(d.getUTCDate() + 1)
+  return d.toISOString().slice(0, 10)
+}
+
 function buildAuthClient(token: CalendarToken) {
   const oauth2Client = getOAuth2Client()
   oauth2Client.setCredentials({
@@ -91,7 +98,7 @@ export async function createGoogleEvent(
         ? { date: event.start_time.slice(0, 10) }
         : { dateTime: event.start_time },
       end: event.is_all_day
-        ? { date: event.end_time.slice(0, 10) }
+        ? { date: allDayEndDate(event.end_time) }
         : { dateTime: event.end_time },
       colorId: event.color ?? undefined,
     },
@@ -117,7 +124,7 @@ export async function updateGoogleEvent(
         ? { date: event.start_time.slice(0, 10) }
         : { dateTime: event.start_time },
       end: event.is_all_day
-        ? { date: event.end_time.slice(0, 10) }
+        ? { date: allDayEndDate(event.end_time) }
         : { dateTime: event.end_time },
       colorId: event.color ?? undefined,
     },
