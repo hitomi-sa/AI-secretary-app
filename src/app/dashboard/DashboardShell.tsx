@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Sidebar from '@/components/layout/Sidebar'
 import Header from '@/components/layout/Header'
 import MobileMenu from '@/components/layout/MobileMenu'
+import AuthProvider from '@/contexts/AuthContext'
 
 interface DashboardShellProps {
   children: React.ReactNode
@@ -13,6 +14,7 @@ export default function DashboardShell({ children }: DashboardShellProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
+    <AuthProvider>
     <div className="min-h-screen flex bg-background">
       {/* Desktop Sidebar */}
       <div className="hidden md:flex flex-shrink-0">
@@ -33,5 +35,6 @@ export default function DashboardShell({ children }: DashboardShellProps) {
         </main>
       </div>
     </div>
+    </AuthProvider>
   )
 }
