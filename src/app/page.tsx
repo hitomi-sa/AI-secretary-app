@@ -13,10 +13,10 @@ export default function Home() {
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {[
-            { label: 'タスク管理', desc: 'Todo・期限・優先度', href: '/tasks' },
-            { label: '文章校正', desc: 'メール・報告書を AI 校正', href: '/writing' },
-            { label: '議事録作成', desc: '音声 → 自動文字起こし', href: '/minutes' },
-            { label: 'リサーチ', desc: 'Perplexity で最新情報収集', href: '/research' },
+            { label: 'タスク管理', desc: 'Todo・期限・優先度', href: '/dashboard/tasks' },
+            { label: '文章校正', desc: 'メール・報告書を AI 校正', href: '/dashboard/documents/proofread' },
+            { label: '議事録作成', desc: '音声 → 自動文字起こし', href: '/dashboard/documents/minutes' },
+            { label: 'リサーチ', desc: 'Perplexity で最新情報収集', href: '/dashboard/documents/research' },
           ].map((item) => (
             <a
               key={item.href}
